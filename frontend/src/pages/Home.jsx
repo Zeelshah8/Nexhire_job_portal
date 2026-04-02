@@ -1,7 +1,7 @@
 import React from "react";
 import Hero from '../components/Hero.jsx';
 import TopNiches from '../components/TopNiches.jsx';
-import HowITWorks from '../components/HowITWorks.jsx';
+import HowItWorks from '../components/HowItWorks.jsx';
  
 const Home=()=>{
     return(
@@ -9,7 +9,7 @@ const Home=()=>{
 
             <Hero/>
             <TopNiches/>
-            <HowITWorks/>
+            <HowItWorks/>
 
         </>
     )
