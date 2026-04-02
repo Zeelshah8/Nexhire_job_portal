@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import backendUrl from "./urlHelper";
 
 const jobSlice = createSlice({
   name: "jobs",
@@ -103,7 +104,7 @@ export const fetchJobs = (city, niche, searchKeyword) => async (dispatch) => {
   try {
     dispatch(jobSlice.actions.requestForAllJobs());
 
-    let link = "http://localhost:4000/api/v1/job/getall?";
+    let link = `${backendUrl}/api/v1/job/getall?`;
     let queryParams = [];
 
     if (searchKeyword) {
@@ -134,7 +135,7 @@ export const fetchSingleJob = (jobId) => async (dispatch) => {
   try {
     dispatch(jobSlice.actions.requestForSingleJob());
 
-    const response = await axios.get(`http://localhost:4000/api/v1/job/get/${jobId}`, 
+    const response = await axios.get(`${backendUrl}/api/v1/job/get/${jobId}`, 
       { withCredentials: true,
     });
 
@@ -157,7 +158,7 @@ export const postJob = (FormData) => async (dispatch) => {
   try {
     dispatch(jobSlice.actions.requestForPostJob());
 
-    const { data } = await axios.post("http://localhost:4000/api/v1/job/post",
+    const { data } = await axios.post(`${backendUrl}/api/v1/job/post`,
       FormData,
       {
         withCredentials: true, //  for cookies
@@ -178,7 +179,7 @@ export const getMyJobs = () => async (dispatch) => {
   dispatch(jobSlice.actions.requestForMyJobs());
   try {
     const response = await axios.get(
-      `http://localhost:4000/api/v1/job/getmyjobs`,
+      `${backendUrl}/api/v1/job/getmyjobs`,
       { withCredentials: true }
     );
     dispatch(jobSlice.actions.successForMyJobs(response.data.myJobs));
@@ -192,7 +193,7 @@ export const deleteJob = (id) => async (dispatch) => {
   dispatch(jobSlice.actions.requestForDeleteJob());
   try {
     const response = await axios.delete(
-       `http://localhost:4000/api/v1/job/delete/${id}`,
+       `${backendUrl}/api/v1/job/delete/${id}`,
       { withCredentials: true }
     );
     dispatch(jobSlice.actions.successForDeleteJob(response.data.message));
